@@ -97,16 +97,22 @@ async def logout():
     supabase.auth.sign_out()
     return {"message": "Logged out"}
 
-# Project routes (simple, assume authenticated via Supabase token in future)
+# Project routes 
 @app.post("/projects")
 async def create_project(project: ProjectCreate):
-    data = supabase.table("projects").insert({
-        "name": project.name,
-        "description": project.description,
-       # "user_id": "temp-user-id"  # Replace with real auth
-    }).execute()
-    return data.data[0]
-
+    try:
+        data = supabase.table("projects").insert({
+            "name": project.name,
+            "description": project.description or None,  # Handle empty
+        }).execute()
+        if not data.data:
+            raise HTTPException(status_code=400, detail="Insert failed: no data returned")
+        return data.data[0]
+    except Exception as e:
+        # Log full error + return detail for debugging
+        print(f"Project insert error: {str(e)}")  # Shows in Render logs
+        raise HTTPException(status_code=500, detail=f"DB Error: {str(e)}")
+        
 @app.get("/projects")
 async def list_projects():
     data = supabase.table("projects").select("*").execute()
