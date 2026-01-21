@@ -1,0 +1,9 @@
+# backend/requirements.txt
+fastapi
+uvicorn
+supabase
+groq
+e2b-code-interpreter>=1.0.0
+e2b
+python-dotenv
+pydantic
