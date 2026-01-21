@@ -1,11 +1,11 @@
-#Alpha Backend for xAppBuilder using FastAPI + Supabase + Groq + E2B.#
+# Alpha Backend for xAppBuilder using FastAPI + Supabase + Groq + E2B.
 
-'''
-**Run instructions
+
+**Run instructions**
 cd backend
 pip install -r requirements.txt
 cp .env.example .env  # Fill in your keys
-uvicorn main:app --reload'''
+uvicorn main:app --reload
 
 
 **This implements Phase 1 from the plan:**
