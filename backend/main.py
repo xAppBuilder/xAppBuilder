@@ -103,7 +103,7 @@ async def create_project(project: ProjectCreate):
     data = supabase.table("projects").insert({
         "name": project.name,
         "description": project.description,
-        "user_id": "temp-user-id"  # Replace with real auth
+       # "user_id": "temp-user-id"  # Replace with real auth
     }).execute()
     return data.data[0]
 
